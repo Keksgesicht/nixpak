@@ -23,6 +23,12 @@ in {
     network = mkEnableOption "network access in the sandbox" // { default = true; };
     shareIpc = mkEnableOption "host IPC namespace in the sandbox";
 
+    extraArgs = mkOption {
+      description = "Additional user defined arguments for bwrap.";
+      type = types.listOf types.str;
+      default = [];
+    };
+
     bind.rw = mkOption {
       description = "Read-write paths to bind-mount into the sandbox.";
       type = bindType;

@@ -80,6 +80,9 @@ let
     ])
 
     (optionals config.bubblewrap.bindEntireStore (bindRo "/nix/store"))
+
+    # custom arguments for testing
+    config.bubblewrap.extraArgs
   ];
   dbusProxyArgs = [ (env "DBUS_SESSION_BUS_ADDRESS") dbusOutsidePath ] ++ config.dbus.args ++ [ "--filter" ];
 
