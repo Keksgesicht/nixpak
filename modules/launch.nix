@@ -35,6 +35,7 @@ let
   bind = bind' "--bind-try";
   bindRo = bind' "--ro-bind-try";
   bindDev = bind' "--dev-bind-try";
+  symLinks = bind' "--symlink";
   setEnv = key: val: [ "--setenv" key val ];
   mountTmpfs = path: [ "--tmpfs" path ];
   
@@ -43,6 +44,7 @@ let
   bindDevPaths = map bindDev config.bubblewrap.bind.dev;
   envVars = mapAttrsToList setEnv config.bubblewrap.env;
   tmpfs = map mountTmpfs config.bubblewrap.tmpfs;
+  symLinksPaths = map symLinks config.bubblewrap.symlink;
 
   app = config.app.package;
   rootPaths = [ app ] ++ config.bubblewrap.extraStorePaths;
@@ -63,6 +65,7 @@ let
     bindRoPaths
     envVars
     tmpfs
+    symLinksPaths
     
     (optionals config.bubblewrap.network "--share-net")
     (optionals config.bubblewrap.apivfs.dev ["--dev" "/dev"])
