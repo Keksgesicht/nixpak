@@ -47,6 +47,12 @@ in {
       default = [];
     };
 
+    symlink = mkOption {
+      description = "Symlinks to create in the sandbox.";
+      type = bindType;
+      default = [];
+    };
+
     bindEntireStore = mkEnableOption "Bind entire nix store." // { default = true; };
 
     extraStorePaths = mkOption {
